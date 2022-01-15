@@ -18,6 +18,7 @@ class AddFood extends React.Component{
             calories: "",
             image: ""
         })
+        this.props.addForm();
     }
 
     handleNameChange = (event) => {
@@ -58,7 +59,7 @@ class AddFood extends React.Component{
                 
                 <label>food image</label>
                 <input type='text'  name="image" value={this.state.image} onChange={(e) => this.handleImageChange(e)}/>
-                <button className="button is-danger">Danger</button>
+                <button className="button is-danger">Add</button>
             </form>
         )
     }

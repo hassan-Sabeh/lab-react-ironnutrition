@@ -3,13 +3,21 @@ import logo from './logo.svg';
 import './App.css';
 import FoodBox from './components/FoodBox.js';
 import foods from './foods.json';
-import AddFood from './components/AddFood.js'
+import AddFood from './components/AddFood.js';
+import 'bulma/css/bulma.css';
 
 const foodList = foods.slice(0, 10);
 
 class App extends React.Component{
     state = {
-      food : foodList
+      food : foodList,
+      addFood: false
+    }
+    addFormHandler = () => {
+      console.log(this.state.addFood)
+      this.setState({
+        addFood: !this.state.addFood
+      }, console.log(this.state.addFood))
     }
 
     addFoodHandler = (foodToAdd) => {
@@ -23,7 +31,11 @@ class App extends React.Component{
     render() {
       return (
       <div className="App">
-        <AddFood addFood={this.addFoodHandler}/>
+        { this.state.addFood ? 
+          <AddFood addFood={this.addFoodHandler} addForm={this.addFormHandler}/>  
+          :
+          <button className="button is-warning" onClick={this.addFormHandler}>Add new food</button>
+        }
         {this.state.food.map(foodEl => {
           return (
             <FoodBox key={foodEl.name} 
