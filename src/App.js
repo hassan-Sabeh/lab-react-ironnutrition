@@ -4,6 +4,7 @@ import './App.css';
 import FoodBox from './components/FoodBox.js';
 import foods from './foods.json';
 import AddFood from './components/AddFood.js';
+import Search from './components/Search.js';
 import 'bulma/css/bulma.css';
 
 const foodList = foods.slice(0, 10);
@@ -11,7 +12,8 @@ const foodList = foods.slice(0, 10);
 class App extends React.Component{
     state = {
       food : foodList,
-      addFood: false
+      addFood: false,
+      foodDisplay: foodList
     }
     addFormHandler = () => {
       console.log(this.state.addFood)
@@ -25,9 +27,16 @@ class App extends React.Component{
       let foodCopy = [...this.state.food]
       foodCopy.push(foodToAdd)
       this.setState({
-           food: foodCopy
+           food: foodCopy,
+           foodDisplay: foodCopy
          }) 
     }
+    searchHandler = (newFoodList) => {
+      this.setState({
+        foodDisplay: newFoodList
+      });
+    }
+
     render() {
       return (
       <div className="App">
@@ -36,7 +45,8 @@ class App extends React.Component{
           :
           <button className="button is-warning" onClick={this.addFormHandler}>Add new food</button>
         }
-        {this.state.food.map(foodEl => {
+        <Search foodLocal={this.state.food} searchHandler={this.searchHandler} />
+        {this.state.foodDisplay.map(foodEl => {
           return (
             <FoodBox key={foodEl.name} 
             img={foodEl.image} 
@@ -47,7 +57,6 @@ class App extends React.Component{
         })}
       </div>
       )
-
     }
 }
 
