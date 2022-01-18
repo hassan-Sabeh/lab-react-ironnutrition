@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bulma/css/bulma.css';
 
-class AddFood extends React.Component{
+class Search extends React.Component{
     state = {
         name: "",
         calories: "",
@@ -47,33 +47,18 @@ class AddFood extends React.Component{
         )
     }
 
-    handleChange = (event) => {
-        //event.target // <input name="calories" value>
-
-        // const name = event.target.name
-        // const value = event.target.value
-        const {name, value} = event.target
-
-        // const o = {}
-        // o[name] = value // {calories: 500}
-
-        this.setState({
-            [name]: value
-        })
-    }
-
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <label>Food Name: </label>
-                <input type='text' name="name" value={this.state.name} onChange={this.handleChange}/>
+                <input type='text' name="name" value={this.state.name} onChange={(e) => this.handleNameChange(e)}/>
                 
                 <label> Number of calories: </label>
-                <input type='text' name="calories" value={this.state.calories} onChange={(e) => this.handleChange(e)}/>
+                <input type='text' name="calories" value={this.state.calories} onChange={(e) => this.handleCaloriesChange(e)}/>
                 
                 <label>food image</label>
-                <input type='text'  name="image" value={this.state.image} onChange={(e) => this.handleChange(e)}/>
+                <input type='text'  name="image" value={this.state.image} onChange={(e) => this.handleImageChange(e)}/>
                 <button className="button is-danger">Add</button>
             </form>
         )
